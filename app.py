@@ -3,6 +3,7 @@ import pandas as pd
 from flask import Flask, jsonify
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
+from ucimlrepo import fetch_ucirepo 
 
 '''
 env_content = """DB_USER=postgres
@@ -37,13 +38,17 @@ def home():
 
 @app.route("/load-data", methods=["POST"])
 def load_data():
-    df = pd.read_csv("hour.csv", parse_dates=["dteday"])
-    df.to_sql("bike_sharing", engine, if_exists="append", index=False)
+    bike_sharing = fetch_ucirepo(id=275) 
+    # data (as pandas dataframes) 
+    X = bike_sharing.data.features 
+    y = bike_sharing.data.targets  
+    bike_sharing_dataframe = bike_sharing.data['original']
+    bike_sharing_dataframe.to_sql("bike_sharing", engine, if_exists="append", index=False)
     return jsonify({"message": "Dataset caricato con successo!"})
 
 @app.route("/records")
 def records():
-    query = "SELECT * FROM test_table LIMIT 10;"
+    query = "SELECT * FROM bike_sharing LIMIT 10;"
     result = pd.read_sql(query, engine)
     return result.to_json(orient="records")
 
