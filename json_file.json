@@ -1,0 +1,12 @@
+{
+  "season": 1,
+  "yr": 2,
+  "holiday": 0,
+  "workingday": 1,
+  "weathersit": 2,
+  "hum": 0.55,
+  "windspeed": 0.1,
+  "hr": 5,
+  "mnth": 12,
+  "avg_temp": 0.32
+}

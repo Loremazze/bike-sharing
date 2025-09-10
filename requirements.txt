@@ -3,3 +3,8 @@ SQLAlchemy
 psycopg2-binary
 pandas
 python-dotenv
+ucimlrepo
+scikit-learn
+numpy
+matplotlib
+seaborn
